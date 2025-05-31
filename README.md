@@ -1,5 +1,5 @@
-# homebrew-hyperion.ng
-Install [`Hyperion.NG`](https://github.com/hyperion-project/hyperion.ng) via Homebrew
+# A Homebrew tap for Hyperion.NG
+Install [`Hyperion.NG`](https://github.com/hyperion-project/hyperion.ng) on macOS via Homebrew
 
 > [!IMPORTANT]  
 > First, make sure you have installed [`Homebrew`](https://brew.sh) if you haven't yet.
@@ -8,7 +8,7 @@ Install [`Hyperion.NG`](https://github.com/hyperion-project/hyperion.ng) via Hom
 
 Add hyperion to local homebrew cask. You only need to do this once.
 ```
-brew tap paulchen-panther/hyperion.ng
+brew tap hyperion-project/hyperion.ng
 ```
 
 Install hyperion
@@ -24,6 +24,7 @@ brew install --cask --no-quarantine hyperion
 
 Run the following:
 ```
-$ brew uninstall --cask hyperion
+brew uninstall --cask hyperion
+brew untap hyperion-project/hyperion.ng
 ```
 

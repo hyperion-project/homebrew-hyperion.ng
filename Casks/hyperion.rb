@@ -12,14 +12,16 @@ cask "hyperion" do
     strategy :github_latest
   end
 
-  conflicts_with cask: "hyperion_nightly"
+  conflicts_with formula: "hyperion"
   depends_on macos: ">= :big_sur"
 
   app "Hyperion.app"
   uninstall quit: "com.hyperion-project.Hyperion"
 
   zap trash: [
-    "~/.hyperion",
     "~/Library/Preferences/com.hyperion-project.Hyperion.plist"
+  ],
+  rmdir: [
+    "~/.hyperion"
   ]
 end
