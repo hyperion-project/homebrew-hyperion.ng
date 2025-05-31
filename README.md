@@ -8,12 +8,12 @@ Install [`Hyperion.NG`](https://github.com/hyperion-project/hyperion.ng) via Hom
 
 Add hyperion to local homebrew cask. You only need to do this once.
 ```
-$ brew tap paulchen-panther/hyperion.ng
+brew tap paulchen-panther/hyperion.ng
 ```
 
 Install hyperion
 ```
-$ brew install --cask --no-quarantine hyperion
+brew install --cask --no-quarantine hyperion
 ```
 
 > [!TIP] Why you need the "--no-quarantine" parameter?
