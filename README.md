@@ -16,7 +16,8 @@ Install hyperion
 brew install --cask --no-quarantine hyperion
 ```
 
-> [!TIP] Why you need the "--no-quarantine" parameter?
+> [!NOTE]
+> Why you need the "--no-quarantine" parameter? <br>
 > MacOS marks all files downloaded from the Internet as quarantined. When you run a quarantined program, macOS displays the message **Hyperion can’t be opened because Apple cannot check it for malicious software"**.
 > Of course, the new program is downloaded from the Internet, so don't mark it as quarantined use the **"--no-quarantine"** option*.
 
@@ -28,3 +29,6 @@ brew uninstall --cask hyperion
 brew untap hyperion-project/hyperion.ng
 ```
 
+## License
+The source is released under MIT-License (see https://opensource.org/licenses/MIT).<br>
+[![GitHub license](https://img.shields.io/badge/License-MIT-yellow.svg)](https://raw.githubusercontent.com/hyperion-project/homebrew-hyperion.ng/refs/heads/main/LICENSE)
