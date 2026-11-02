@@ -1,35 +1,29 @@
 cask "hyperion" do
   arch arm: "arm64", intel: "x86_64"
-  version "2.1.1"
-  sha256 arm: "a922247fcdd77b6cc2a4ca8600e2ec1ce89d706b6dcdd658f460534a1daa23d9", intel: "424e5d2223de3f6600efcbf8c08621f9351029aa5adce33d9332a0af7a4bf5c7"
 
-  on_arm do
-    depends_on macos: ">= :sonoma"
-  end
-  on_intel do
-    depends_on macos: ">= :ventura"
-  end
+  version "2.2.1"
+  sha256 arm:   "8468242cd0e3fb433ca6c22c3cd4cd5ce0a20bded31a596a8258bf63d8aade5e",
+         intel: "b7eb3228757c525cf4a290ab275561ac44fb0617bb6e079c8d877890c5ccfe17"
 
-
-  url "https://github.com/hyperion-project/hyperion.ng/releases/download/#{version}/Hyperion-#{version}-macOS-#{arch}.dmg", verified: "github.com/hyperion-project/hyperion.ng/"
+  url "https://github.com/hyperion-project/hyperion.ng/releases/download/#{version}/Hyperion-#{version}-macOS-#{arch}.dmg"
   name "Hyperion"
-  desc "The successor to Hyperion aka Hyperion Next Generation"
+  name "Hyperion.NG"
+  desc "Ambient and bias lighting controller"
   homepage "https://hyperion-project.org/"
 
   livecheck do
-    url "url"
+    url :url
     strategy :github_latest
   end
 
-  conflicts_with formula: "hyperion"
+  depends_on macos: :sequoia
 
   app "Hyperion.app"
+
   uninstall quit: "com.hyperion-project.Hyperion"
 
   zap trash: [
-    "~/Library/Preferences/com.hyperion-project.Hyperion.plist"
-  ],
-  rmdir: [
-    "~/.hyperion"
+    "~/.hyperion",
+    "~/Library/Preferences/com.hyperion-project.Hyperion.plist",
   ]
 end
