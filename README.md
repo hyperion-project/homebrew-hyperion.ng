@@ -13,13 +13,21 @@ brew tap hyperion-project/hyperion.ng
 
 Install hyperion
 ```
-brew install --cask --no-quarantine hyperion
+brew install --cask hyperion
 ```
 
-> [!NOTE]
-> Why you need the "--no-quarantine" parameter? <br>
-> MacOS marks all files downloaded from the Internet as quarantined. When you run a quarantined program, macOS displays the message **Hyperion can’t be opened because Apple cannot check it for malicious software"**.
-> Of course, the new program is downloaded from the Internet, so don't mark it as quarantined use the **"--no-quarantine"** option*.
+## First launch
+
+Hyperion is not yet notarized, so macOS Gatekeeper blocks it the first time it is opened. To allow it:
+
+1. Open Hyperion from `/Applications`. macOS reports that it cannot verify the app; click **Done**.
+2. Open **System Settings → Privacy & Security**, scroll to the **Security** section, and click **Open Anyway** next to the message about Hyperion.
+3. Confirm with your password or Touch ID. Hyperion opens normally from then on.
+
+If macOS instead reports that Hyperion **is damaged and can't be opened**, the app is fine; macOS shows this message for unnotarized apps on some systems. Remove the quarantine flag from the installed app and open it again:
+```
+xattr -dr com.apple.quarantine /Applications/Hyperion.app
+```
 
 ## Uninstall
 
