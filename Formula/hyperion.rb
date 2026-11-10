@@ -1,43 +1,39 @@
 class Hyperion < Formula
-  desc "Open source Bias or Ambient Lighting implementation"
+  desc "Ambient and bias lighting controller"
   homepage "https://hyperion-project.org/"
-  url "https://github.com/hyperion-project/hyperion.ng.git"
-  version "master"
+  url "https://github.com/hyperion-project/hyperion.ng.git",
+      tag:      "2.2.1",
+      revision: "1a003600361118483ecfc6445a549d3703f9e063"
   license "MIT"
   head "https://github.com/hyperion-project/hyperion.ng.git", branch: "master"
 
+  livecheck do
+    url :stable
+    strategy :github_latest
+  end
+
   depends_on "cmake" => :build
   depends_on "ninja" => :build
-  depends_on "pkg-config" => :build
-
-  depends_on "flatbuffers"
-  depends_on "hidapi"
-  depends_on "libftdi"
-  depends_on "libusb"
-  depends_on "mbedtls"
-  depends_on "openssl@1.1"
-  depends_on "protobuf"
-  depends_on "python3"
-  depends_on "qt"
+  depends_on "pkgconf" => :build
+  depends_on "abseil"
+  depends_on :macos
+  depends_on "python@3.14"
+  depends_on "qtbase"
+  depends_on "qtserialport"
+  depends_on "qtwebsockets"
 
   def install
-    cmake_args = std_cmake_args
-    cmake_args << "-DUSE_SYSTEM_LIBUSB_LIBS=ON"
-    cmake_args << "-DUSE_SYSTEM_LIBFTDI_LIBS=ON"
-    cmake_args << "-DUSE_SYSTEM_HIDAPI_LIBS=ON"
-    cmake_args << "-DUSE_SYSTEM_FLATBUFFERS_LIBS=ON"
-    cmake_args << "-DUSE_SYSTEM_PROTO_LIBS=ON"
-    cmake_args << "-DUSE_SYSTEM_MBEDTLS_LIBS=ON"
-    cmake_args << "-DCMAKE_FIND_FRAMEWORK=FIRST"
-
-    system "cmake", "-G", "Ninja", "-S", ".","-B", "build", *cmake_args
+    system "cmake", "-S", ".", "-B", "build", "-G", "Ninja",
+                    "-DPLATFORM=osx",
+                    "-DPython3_EXECUTABLE=#{which("python3.14")}",
+                    *std_cmake_args
     system "cmake", "--build", "build"
     system "cmake", "--install", "build"
 
-    bin.write_exec_script "#{prefix}/Hyperion.app/Contents/MacOS/Hyperion"
+    bin.write_exec_script prefix/"Hyperion.app/Contents/MacOS/Hyperion"
   end
 
   test do
-    system "#{bin}/Hyperion", "-h"
+    assert_match version.to_s, shell_output("#{bin}/Hyperion --service --version")
   end
 end
